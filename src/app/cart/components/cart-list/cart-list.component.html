@@ -1,0 +1,32 @@
+<div>
+  <div *ngIf="areCartItemsEmpty(); else cartItemsBlock">
+    <div class="content-container">
+      <h3>Your cart is empty</h3>
+    </div>
+  </div>
+
+  <ng-template #cartItemsBlock>
+    <div *ngFor="let cartItem of cartItems">
+
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{cartItem.product.name}}, ({{cartItem.quantity}})</mat-card-title>
+          <mat-card-subtitle>{{cartItem.product.price | currency:'UAH':'symbol-narrow'}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions>
+          <button (click)="onIncreaseQuantityClick($event, cartItem.id)" mat-button>+</button>
+          <button (click)="onDecreaseQuantityClick($event, cartItem.id)" mat-button>-</button>
+          <button (click)="onDeleteClick($event, cartItem.id)" mat-button>Delete</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+
+    <br><br>
+    <div class="content-container">
+      <div>Total Price: {{this.cartService.totalPrice}}</div>
+      <div>Total Quantity: {{this.cartService.totalQuantity}}</div>
+      <button (click)="onClearCartClick($event)" mat-button id="clear_cart">Clear Cart</button>
+      <button (click)="confirmOrder()" mat-button id="checkout">Checkout</button>
+    </div>
+  </ng-template>
+</div>

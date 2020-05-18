@@ -1,0 +1,28 @@
+<h1 class="title" id="headline-label">Process Order</h1>
+<div class="form-container">
+  <form (ngSubmit)="onSave()" [formGroup]="form">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput [formControlName]="'name'" id="name_input">
+    </mat-form-field>
+
+    <mat-error *ngIf="(form.get('name').touched || form.get('name').dirty) && form.get('name').errors">
+      Enter at least 3 characters
+    </mat-error>
+    <br>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput [formControlName]="'email'" id="email_input">
+    </mat-form-field>
+
+    <mat-error *ngIf="(form.get('email').touched || form.get('email').dirty) && form.get('email').errors">
+      Enter valid email with domain
+    </mat-error>
+
+    <br>
+    <br>
+    <button mat-button type="submit" [disabled]="form.invalid" id="confirm_button">Confirm</button>
+  </form>
+</div>
