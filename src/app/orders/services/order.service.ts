@@ -2,35 +2,21 @@ import { Injectable } from '@angular/core';
 import { CartService } from '../../shared/services/cart.service';
 import { OrderModel } from '../model/order.model';
 import { Observable, of } from 'rxjs';
-import { ProductCategory } from '../../products/enums/product-category.enum';
-
-const orders: OrderModel[] = [
-  new OrderModel(
-    [ {
-      id: 1,
-      name: 'Samsung Galaxy',
-      description: 'Phone for real man',
-      price: 505,
-      category: ProductCategory.PHONE,
-      isAvailable: true
-    }],
-    'Vitia',
-    'Ivan@gmail.com',
-  1
-  )
-];
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ProductModel } from '../../products/models/product.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
 
-  private ordersBaseUrl = 'http://localhost:3000/orders';
+  private ordersBaseUrl = 'http://localhost:8080/orders';
 
-  constructor(private cartService: CartService) {
+  constructor(private cartService: CartService,
+              private http: HttpClient) {
   }
 
-  createOrder(consumerName: string, consumerEmail: string) {
+  createOrder(consumerName: string, consumerEmail: string): Observable<OrderModel> {
     const products = this.cartService.cartItems
       .map(item => item.product);
 
@@ -41,10 +27,15 @@ export class OrderService {
     );
 
     console.log(order);
-    // http.post()
+    const body = JSON.stringify(order);
+    const options = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+
+    return this.http.post<OrderModel>(this.ordersBaseUrl, body, options);
   }
 
   getOrders(): Observable<OrderModel[]> {
-    return of(orders);
+    return this.http.get<OrderModel[]>(this.ordersBaseUrl);
   }
 }

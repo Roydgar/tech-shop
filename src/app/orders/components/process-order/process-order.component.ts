@@ -35,7 +35,7 @@ export class ProcessOrderComponent implements OnInit {
 
   onSave(): void {
     console.log(`Saved: ${JSON.stringify(this.form.value)}`);
-    this.orderService.createOrder(this.form.value.name, this.form.value.email);
-    this.router.navigate(['/orders']);
+    this.orderService.createOrder(this.form.value.name, this.form.value.email)
+      .subscribe(response => this.router.navigate(['/orders']));
   }
 }

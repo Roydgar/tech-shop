@@ -7,8 +7,11 @@ import { AboutAppComponent } from './about-app/about-app.component';
 
 @NgModule({
   declarations: [NotFoundComponent, AboutAppComponent],
+  exports: [
+    AboutAppComponent
+  ],
   imports: [
-    CommonModule
+    CommonModule,
   ]
 })
 export class LayoutModule { }

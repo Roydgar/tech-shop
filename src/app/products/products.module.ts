@@ -4,11 +4,11 @@ import { SharedModule } from '../shared/shared.module';
 import { ProductComponent } from './components/product/product.component';
 
 @NgModule({
-  declarations: [[ProductComponent, ProductListComponent]],
+  declarations: [ProductComponent, ProductListComponent],
   imports: [
     SharedModule
   ],
-  exports: [ProductListComponent],
+  exports: [],
   providers: []
 })
 export class ProductsModule {

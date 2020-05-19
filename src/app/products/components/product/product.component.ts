@@ -10,11 +10,9 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css']
 })
-export class ProductComponent implements OnInit, OnDestroy {
+export class ProductComponent implements OnInit {
 
   product: ProductModel;
-
-  private sub: Subscription;
 
   constructor(private productService: ProductService,
               private activatedRoute: ActivatedRoute,
@@ -25,16 +23,12 @@ export class ProductComponent implements OnInit, OnDestroy {
     this.loadProduct();
   }
 
-  ngOnDestroy(): void {
-  }
-
   onGoBack() {
     this.location.back();
   }
 
   private loadProduct(): void {
     const id = +this.activatedRoute.snapshot.paramMap.get('productID');
-    console.log(id);
-    this.sub = this.productService.getProduct(id).subscribe(product => this.product = product);
+    this.productService.getProduct(id).subscribe(product => this.product = product);
   }
 }

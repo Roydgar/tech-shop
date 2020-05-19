@@ -17,6 +17,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDividerModule } from '@angular/material/divider';
 import { MessageSnackbarComponent } from './components/message-snackbar/message-snackbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [MessageSnackbarComponent],
@@ -39,6 +40,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MessageSnackbarComponent,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     CommonModule,
   ],
   imports: [
